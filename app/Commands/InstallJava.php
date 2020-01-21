@@ -152,6 +152,8 @@ class InstallJava extends Command
         }
 
         $this->info(shell_exec("curl -L -o {$filename} {$url}"));
+        $this->info("{$filename} has been downloaded in the current directory");
+        $this->info('Please, click on it to finish installation');
 
         return $this;
     }
