@@ -4,7 +4,6 @@ namespace App\Commands;
 
 use App\Helpers\Github;
 use LaravelZero\Framework\Commands\Command;
-use Symfony\Component\Process\Process;
 
 class Install extends Command
 {
@@ -48,16 +47,7 @@ class Install extends Command
 
         $command = Github::clone($repos);
 
-        $process = Process::fromShellCommandline($command->implode(' && '), null, null, null, null);
-
-        $bar = $this->output->createProgressBar($repos->count());
-
-        $process->run(function ($type, $line) use ($bar) {
-            $this->info($line);
-            $bar->advance();
-        });
-
-        $bar->finish();
+        $this->info(shell_exec($command->implode(' && ')));
 
         return $this;
     }
