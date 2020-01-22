@@ -2,7 +2,6 @@
 
 namespace App\Commands;
 
-use App\Helpers\Github;
 use LaravelZero\Framework\Commands\Command;
 
 class Install extends Command
@@ -38,17 +37,9 @@ class Install extends Command
      */
     protected function cloneRepositories():Command
     {
-        $repos = collect(
-            explode(',', $this->argument('repos'))
-        )->unique();
-
-        $this->info("Cloning {$repos->implode(', ')}");
-        $this->info('The process will take some minutes');
-
-        $command = Github::clone($repos);
-
-        $this->info(shell_exec($command->implode(' && ')));
-
+        $this->call('github:clone', [
+            'repos' => $this->argument('repos')
+        ]);
         return $this;
     }
 }

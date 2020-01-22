@@ -12,16 +12,12 @@ return [
     */
 
     'repositories' => [
-        'public' => [
-            'ma-core-public',
-            'ma-modules-public',
-            'ma-dashboards',
-        ],
-        'private' => [
-            'ma-modules-private',
-            'ma-modules-proprietary',
-            'dashboards'
-        ]
+        'ma-core-public',
+        'ma-modules-public',
+        'ma-dashboards',
+        'ma-modules-private',
+        'ma-modules-proprietary',
+        'dashboards'
     ],
 
 ];

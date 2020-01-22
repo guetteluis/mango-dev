@@ -12,13 +12,18 @@ class Github
     {
         $command = collect();
 
-        $repos->each(function ($repo) use ($command) {
+        $repos->each(function (string $repo) use ($command) {
             $repoUrl = self::buildRepoUrl($repo);
 
             $command->push("git clone {$repoUrl}");
         });
 
         return $command;
+    }
+
+    public static function getInvalidRepos(Collection $repos)
+    {
+        return $repos->diff(config('git.repositories'));
     }
 
     protected static function buildRepoUrl(string $repo):string
