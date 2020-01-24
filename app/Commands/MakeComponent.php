@@ -52,7 +52,7 @@ class MakeComponent extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $name = $this->getNameInput();
 
         $path = $this->getPath($name);
 
@@ -197,5 +197,15 @@ class MakeComponent extends Command
     protected function replaceClass(string $stub, string $name):string
     {
         return str_replace('DummyClassname', $name, $stub);
+    }
+
+    /**
+     * Get the desired class name from the input.
+     *
+     * @return string
+     */
+    protected function getNameInput()
+    {
+        return trim($this->argument('name'));
     }
 }
