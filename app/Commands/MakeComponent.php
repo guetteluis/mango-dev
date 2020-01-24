@@ -182,7 +182,7 @@ class MakeComponent extends Command
      */
     protected function replaceTemplate(string &$stub, string $name):self
     {
-        $stub = str_replace('DummyTemplate', $name . 'Template', $stub);
+        $stub = str_replace('DummyTemplate', $name, $stub);
 
         return $this;
     }

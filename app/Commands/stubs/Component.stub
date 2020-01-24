@@ -5,7 +5,7 @@
 
 import DummyTemplate from './DummyTemplate.html';
 
-class DummyClassname {
+class DummyClassnameComponent {
     static get $$ngIsClass() { return true; }
     static get $inject() { return []; }
 
@@ -17,5 +17,5 @@ class DummyClassname {
 
 export default {
     template: DummyTemplate,
-    controller: DummyClassname,
+    controller: DummyClassnameComponent,
 };
