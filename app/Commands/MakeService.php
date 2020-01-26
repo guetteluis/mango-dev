@@ -5,9 +5,8 @@ namespace App\Commands;
 use App\Helpers\Generators\ServiceClassGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use LaravelZero\Framework\Commands\Command;
 
-class MakeService extends Command
+class MakeService extends BaseCommand
 {
     /**
      * The signature of the command.
@@ -22,7 +21,7 @@ class MakeService extends Command
      *
      * @var string
      */
-    protected $description = 'Creates a AngularJS service';
+    protected $description = 'Creates an AngularJS service';
 
     /**
      * Execute the console command.
@@ -51,15 +50,5 @@ class MakeService extends Command
         }
 
         $this->info($name . ' created successfully.');
-    }
-
-    /**
-     * Get the desired class name from the input.
-     *
-     * @return string
-     */
-    protected function getNameInput()
-    {
-        return trim($this->argument('name'));
     }
 }

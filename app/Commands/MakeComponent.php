@@ -7,9 +7,8 @@ use App\Helpers\Generators\ComponentTemplateGenerator;
 use App\Traits\StubReplacer;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use LaravelZero\Framework\Commands\Command;
 
-class MakeComponent extends Command
+class MakeComponent extends BaseCommand
 {
     use StubReplacer;
 
@@ -26,7 +25,7 @@ class MakeComponent extends Command
      *
      * @var string
      */
-    protected $description = 'Creates a AngularJS component';
+    protected $description = 'Creates an AngularJS component';
 
     /**
      * Execute the console command.
@@ -58,15 +57,5 @@ class MakeComponent extends Command
         }
 
         $this->info($name . ' created successfully.');
-    }
-
-    /**
-     * Get the desired class name from the input.
-     *
-     * @return string
-     */
-    protected function getNameInput()
-    {
-        return trim($this->argument('name'));
     }
 }
