@@ -1,0 +1,18 @@
+/**
+* @copyright 2020 {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
+* @author DummyAuthor
+*/
+
+DummyClassnameFactory.$inject = [];
+function DummyClassnameFactory() {
+
+    class DummyClassname {
+
+    }
+
+    return DummyClassname;
+}
+
+export default DummyClassnameFactory;
+
+
