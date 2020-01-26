@@ -50,7 +50,7 @@ class FrontendNew extends BaseCommand
 
         try {
 
-            $webpackGenerator->create();
+            $webpackGenerator->createFile($this->getNameInput());
 
         } catch (FileExistsException $exception) {
 
@@ -76,7 +76,7 @@ class FrontendNew extends BaseCommand
 
         try {
 
-            $pomGenerator->createPom($this->getNameInput(), $this->argument('pom-version'));
+            $pomGenerator->createFile($this->getNameInput(), $this->argument('pom-version'));
 
         } catch (FileExistsException $exception) {
 

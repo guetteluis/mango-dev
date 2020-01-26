@@ -48,7 +48,7 @@ class PomGenerator extends Generator
      * @throws FileExistsException
      * @throws FileNotFoundException
      */
-    public function createPom(string $projectName, string $version)
+    public function createFile(string $projectName, string $version)
     {
         $this->projectName = $projectName;
         $this->version = $version;
@@ -92,6 +92,6 @@ class PomGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd();
+        return getcwd() . '/' . $this->projectName;
     }
 }

@@ -4,6 +4,7 @@
 namespace App\Helpers\Generators\Frontend;
 
 use App\Helpers\Generators\Generator;
+use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class WebpackConfigGenerator extends Generator
@@ -30,6 +31,24 @@ class WebpackConfigGenerator extends Generator
     protected $ext = '.config.js';
 
     /**
+     * @var string
+     */
+    protected $projectName;
+
+    /**
+     * Creates file
+     *
+     * @param string $projectName
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     */
+    public function createFile(string $projectName)
+    {
+        $this->projectName = $projectName;
+        $this->create();
+    }
+
+    /**
      * Replace dummy names.
      *
      * @param string $stub
@@ -37,9 +56,10 @@ class WebpackConfigGenerator extends Generator
      */
     protected function replaceDummyNames(string $stub)
     {
-        return $this->replaceYear($stub)
-            ->replaceAuthor($stub)
-            ->replaceClass($stub, $this->name);
+        $this->replaceYear($stub)
+            ->replaceAuthor($stub);
+
+        return $stub;
     }
 
     /**
@@ -62,6 +82,6 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd();
+        return getcwd(). '/' . $this->projectName;
     }
 }
