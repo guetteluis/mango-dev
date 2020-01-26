@@ -31,6 +31,15 @@ class FrontendNewCommandTest extends TestCase
         // Asserts that pom config exists
         $this->assertTrue($this->files->exists(getcwd() . '/' . $this->name . '/pom.xml'));
 
+        // Asserts that package.json exists
+        $this->assertTrue($this->files->exists(getcwd() . '/' . $this->name . '/package.json'));
+
+        // Asserts that components directory exists
+        $this->assertTrue($this->files->isDirectory(getcwd() . '/' . $this->name . '/components'));
+
+        // Asserts that services directory exists
+        $this->assertTrue($this->files->isDirectory(getcwd() . '/' . $this->name . '/services'));
+
         $this->files->deleteDirectory(getcwd() . '/' . $this->name);
     }
 }
