@@ -50,7 +50,7 @@ class ServiceClassGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/Service.stub';
+        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Service.stub';
 
         return $this->files->get($stubPath);
     }

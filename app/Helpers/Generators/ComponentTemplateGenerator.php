@@ -40,7 +40,7 @@ class ComponentTemplateGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/ComponentTemplate.stub';
+        $stubPath = getcwd() . '/app/Commands/stubs/frontend/ComponentTemplate.stub';
 
         return $this->files->get($stubPath);
     }
