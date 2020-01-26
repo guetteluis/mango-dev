@@ -160,6 +160,8 @@ abstract class Generator
      */
     protected function getConfigDir()
     {
-        return config('madev.config_directory');
+        $homePath = trim(shell_exec('echo $HOME'));
+
+        return $homePath . config('madev.config_directory');
     }
 }
