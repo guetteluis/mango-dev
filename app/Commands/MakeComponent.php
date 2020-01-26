@@ -57,7 +57,7 @@ class MakeComponent extends Command
 
         }
 
-        $this->info('Component created successfully.');
+        $this->info($name . ' created successfully.');
     }
 
     /**
