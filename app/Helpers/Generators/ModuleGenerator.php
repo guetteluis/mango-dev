@@ -38,7 +38,8 @@ class ModuleGenerator extends Generator
      */
     protected function replaceDummyNames(string $stub)
     {
-        return $this->replaceAuthor($stub)
+        return $this->replaceYear($stub)
+            ->replaceAuthor($stub)
             ->replaceClass($stub, $this->name);
     }
 

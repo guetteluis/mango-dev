@@ -38,7 +38,8 @@ class ComponentClassGenerator extends Generator
      */
     protected function replaceDummyNames(string $stub)
     {
-        return $this->replaceAuthor($stub)
+        return $this->replaceYear($stub)
+            ->replaceAuthor($stub)
             ->replaceTemplate($stub, $this->name)
             ->replaceClass($stub, $this->name);
     }

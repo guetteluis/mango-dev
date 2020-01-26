@@ -2,9 +2,26 @@
 
 namespace App\Traits;
 
+use Carbon\Carbon;
 use Symfony\Component\Process\Process;
 
-trait StubReplacer{
+trait StubReplacer
+{
+    /**
+     * Replace the year for the given stub.
+     *
+     * @param string $stub
+     * @return $this
+     */
+    protected function replaceYear(string &$stub):self
+    {
+        $year = Carbon::now()->year;
+
+        $stub = str_replace('DummyYear', $year, $stub);
+
+        return $this;
+    }
+
     /**
      * Replace the author name for the given stub.
      *
@@ -13,7 +30,7 @@ trait StubReplacer{
      */
     protected function replaceAuthor(string &$stub):self
     {
-        $author= '';
+        $author = '';
 
         $process = new Process(['git', 'config', 'user.name'], null, null, null, null);
 
