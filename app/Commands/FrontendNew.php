@@ -7,6 +7,7 @@ use App\Helpers\Generators\Frontend\PomGenerator;
 use App\Helpers\Generators\Frontend\WebpackConfigGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem;
 
 class FrontendNew extends BaseCommand
 {
@@ -35,11 +36,25 @@ class FrontendNew extends BaseCommand
     {
         $name = $this->getNameInput();
 
-        $this->createWebpackFile();
+        $this->task('Creating webpack.config.js', function () {
+            return $this->createWebpackFile();
+        });
 
-        $this->createPomFile();
+        $this->task('Creating pom.xml', function () {
+            return $this->createPomFile();
+        });
 
-        $this->createPackageFile();
+        $this->task('Creating package.json', function () {
+            return $this->createPackageFile();
+        });
+
+        $this->task('Creating components folder', function () {
+            return $this->makeDirectory(getcwd() . '/' . $this->getNameInput() .  '/components');
+        });
+
+        $this->task('Creating services folder', function () {
+            return $this->makeDirectory(getcwd() . '/' . $this->getNameInput() .  '/services');
+        });
 
         $this->info($name . ' created successfully.');
     }
@@ -120,5 +135,24 @@ class FrontendNew extends BaseCommand
         }
 
         return true;
+    }
+
+    /**
+     * Creates the directory if necessary.
+     *
+     * @param string $path
+     * @return bool
+     */
+    protected function makeDirectory(string $path)
+    {
+        $files = new Filesystem();
+
+        if (!$files->isDirectory($path)) {
+            $files->makeDirectory($path, 0777, true, true);
+
+            return true;
+        }
+
+        return false;
     }
 }
