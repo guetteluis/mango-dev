@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class MakeComponentCommandTest extends TestCase
+class FrontendMakeComponentCommandTest extends TestCase
 {
     /**
      * @test
@@ -13,7 +13,7 @@ class MakeComponentCommandTest extends TestCase
     {
         $componentName = 'Test';
 
-        $this->artisan('make:component ' . $componentName)
+        $this->artisan('frontend:make:component ' . $componentName)
             ->expectsOutput('Test created successfully.')
             ->assertExitCode(0);
 

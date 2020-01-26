@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class MakeServiceCommandTest extends TestCase
+class FrontendMakeServiceCommandTest extends TestCase
 {
     /**
      * @test
@@ -13,7 +13,7 @@ class MakeServiceCommandTest extends TestCase
     {
         $serviceName = 'Test';
 
-        $this->artisan('make:service ' . $serviceName)
+        $this->artisan('frontend:make:service ' . $serviceName)
             ->expectsOutput('Test created successfully.')
             ->assertExitCode(0);
 

@@ -6,14 +6,14 @@ use App\Helpers\Generators\ServiceClassGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class MakeService extends BaseCommand
+class FrontendMakeService extends BaseCommand
 {
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'make:service
+    protected $signature = 'frontend:make:service
                             {name : Service name}';
 
     /**

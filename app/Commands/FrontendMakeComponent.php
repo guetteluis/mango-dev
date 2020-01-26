@@ -8,7 +8,7 @@ use App\Traits\StubReplacer;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class MakeComponent extends BaseCommand
+class FrontendMakeComponent extends BaseCommand
 {
     use StubReplacer;
 
@@ -17,7 +17,7 @@ class MakeComponent extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'make:component
+    protected $signature = 'frontend:make:component
                             {name : Component name}';
 
     /**
