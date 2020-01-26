@@ -80,7 +80,7 @@ class PomGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Pom.stub';
+        $stubPath = $this->getConfigDir() . '/stubs/frontend/Pom.stub';
 
         return $this->files->get($stubPath);
     }

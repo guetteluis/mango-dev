@@ -52,7 +52,7 @@ class ComponentClassGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Component.stub';
+        $stubPath = $this->getConfigDir() . '/stubs/frontend/Component.stub';
 
         return $this->files->get($stubPath);
     }

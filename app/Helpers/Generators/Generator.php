@@ -5,6 +5,7 @@ namespace App\Helpers\Generators;
 
 
 use App\Traits\StubReplacer;
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
@@ -150,5 +151,15 @@ abstract class Generator
         }
 
         return $path;
+    }
+
+    /**
+     * Get config directory
+     *
+     * @return Repository|mixed
+     */
+    protected function getConfigDir()
+    {
+        return config('madev.config_directory');
     }
 }

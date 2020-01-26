@@ -70,7 +70,7 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Webpack.stub';
+        $stubPath = $this->getConfigDir() . '/stubs/frontend/Webpack.stub';
 
         return $this->files->get($stubPath);
     }

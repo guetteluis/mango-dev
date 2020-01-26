@@ -51,7 +51,7 @@ class ModuleGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Module.stub';
+        $stubPath = $this->getConfigDir() . '/stubs/frontend/Module.stub';
 
         return $this->files->get($stubPath);
     }
