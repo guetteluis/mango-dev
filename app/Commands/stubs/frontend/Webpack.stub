@@ -1,0 +1,8 @@
+/**
+* @copyright DummyYear {@link http://infiniteautomation.com|Infinite Automation Systems, Inc.} All rights reserved.
+* @author DummyAuthor
+*/
+
+const moduleConfig = require('@infinite-automation/mango-module-tools');
+module.exports = moduleConfig();
+

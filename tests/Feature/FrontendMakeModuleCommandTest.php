@@ -19,7 +19,7 @@ class FrontendMakeModuleCommandTest extends TestCase
 
         $basePath = getcwd() . '/web-src/' . $name;
 
-        // Assert that services class exists
+        // Assert that module exists
         $this->assertTrue($this->files->exists($basePath . '.js'));
     }
 }

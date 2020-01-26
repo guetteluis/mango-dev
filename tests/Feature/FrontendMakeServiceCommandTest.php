@@ -19,7 +19,7 @@ class FrontendMakeServiceCommandTest extends TestCase
 
         $basePath = getcwd() . '/web-src/services/' . $serviceName . '/' . $serviceName;
 
-        // Assert that services class exists
+        // Asserts that service class exists
         $this->assertTrue($this->files->exists($basePath . '.js'));
     }
 }

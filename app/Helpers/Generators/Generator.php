@@ -87,9 +87,9 @@ abstract class Generator
      * @throws FileExistsException
      * @throws FileNotFoundException
      */
-    public function create(string $name)
+    public function create(string $name = null)
     {
-        $this->name = $name;
+        if (!$this->name) $this->name = $name;
 
         if ($this->alreadyExists()) {
             throw new FileExistsException($this->type . ' file already exists');

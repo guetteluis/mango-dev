@@ -19,10 +19,10 @@ class FrontendMakeComponentCommandTest extends TestCase
 
         $basePath = getcwd() . '/web-src/components/' . $componentName . '/' . $componentName;
 
-        // Assert that component class exists
+        // Asserts that component class exists
         $this->assertTrue($this->files->exists($basePath . '.js'));
 
-        // Assert that component template exists
+        // Asserts that component template exists
         $this->assertTrue($this->files->exists($basePath . '.html'));
     }
 }
