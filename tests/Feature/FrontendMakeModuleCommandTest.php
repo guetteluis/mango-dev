@@ -4,20 +4,20 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class MakeServiceCommandTest extends TestCase
+class FrontendMakeModuleCommandTest extends TestCase
 {
     /**
      * @test
      */
-    public function a_service_can_be_created()
+    public function a_module_can_be_created()
     {
-        $serviceName = 'Test';
+        $name = 'Test';
 
-        $this->artisan('make:service ' . $serviceName)
+        $this->artisan('frontend:make:module ' . $name)
             ->expectsOutput('Test created successfully.')
             ->assertExitCode(0);
 
-        $basePath = getcwd() . '/web-src/services/' . $serviceName . '/' . $serviceName;
+        $basePath = getcwd() . '/web-src/' . $name;
 
         // Assert that services class exists
         $this->assertTrue($this->files->exists($basePath . '.js'));

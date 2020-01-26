@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Filesystem\Filesystem;
 use Tests\TestCase;
 
 class MakeComponentCommandTest extends TestCase
@@ -12,8 +11,6 @@ class MakeComponentCommandTest extends TestCase
      */
     public function a_component_can_be_created()
     {
-        $files = new Filesystem();
-
         $componentName = 'Test';
 
         $this->artisan('make:component ' . $componentName)
@@ -23,11 +20,9 @@ class MakeComponentCommandTest extends TestCase
         $basePath = getcwd() . '/web-src/components/' . $componentName . '/' . $componentName;
 
         // Assert that component class exists
-        $this->assertTrue($files->exists($basePath . '.js'));
+        $this->assertTrue($this->files->exists($basePath . '.js'));
 
         // Assert that component template exists
-        $this->assertTrue($files->exists($basePath . '.html'));
-
-        $files->deleteDirectory(getcwd() . '/web-src');
+        $this->assertTrue($this->files->exists($basePath . '.html'));
     }
 }

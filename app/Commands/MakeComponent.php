@@ -32,7 +32,7 @@ class MakeComponent extends BaseCommand
      *
      * @param ComponentClassGenerator $classGenerator
      * @param ComponentTemplateGenerator $templateGenerator
-     * @return void
+     * @return bool|void
      */
     public function handle(ComponentClassGenerator $classGenerator,
                            ComponentTemplateGenerator $templateGenerator)
@@ -47,12 +47,12 @@ class MakeComponent extends BaseCommand
         } catch (FileExistsException $exception) {
 
             $this->error('Component already exists.');
-            die();
+            return false;
 
         } catch (FileNotFoundException $exception) {
 
             $this->error('Component stub not found.');
-            die();
+            return false;
 
         }
 

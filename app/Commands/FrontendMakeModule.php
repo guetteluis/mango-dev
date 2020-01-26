@@ -2,8 +2,9 @@
 
 namespace App\Commands;
 
-use Illuminate\Console\Scheduling\Schedule;
-use LaravelZero\Framework\Commands\Command;
+use App\Helpers\Generators\ModuleGenerator;
+use Illuminate\Contracts\Filesystem\FileExistsException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class FrontendMakeModule extends BaseCommand
 {
@@ -25,10 +26,29 @@ class FrontendMakeModule extends BaseCommand
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @param ModuleGenerator $generator
+     * @return bool|void
      */
-    public function handle()
+    public function handle(ModuleGenerator $generator)
     {
+        $name = $this->getNameInput();
 
+        try {
+
+            $generator->create($name);
+
+        } catch (FileExistsException $exception) {
+
+            $this->error('Module already exists.');
+            return false;
+
+        } catch (FileNotFoundException $exception) {
+
+            $this->error('Module stub not found.');
+            return false;
+
+        }
+
+        $this->info($name . ' created successfully.');
     }
 }

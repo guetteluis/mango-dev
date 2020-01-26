@@ -27,7 +27,7 @@ class MakeService extends BaseCommand
      * Execute the console command.
      *
      * @param ServiceClassGenerator $generator
-     * @return void
+     * @return bool|void
      */
     public function handle(ServiceClassGenerator $generator)
     {
@@ -40,12 +40,12 @@ class MakeService extends BaseCommand
         } catch (FileExistsException $exception) {
 
             $this->error('Service already exists.');
-            die();
+            return false;
 
         } catch (FileNotFoundException $exception) {
 
             $this->error('Service stub not found.');
-            die();
+            return false;
 
         }
 
