@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Helpers\Generators\Frontend\PackageGenerator;
 use App\Helpers\Generators\Frontend\PomGenerator;
 use App\Helpers\Generators\Frontend\WebpackConfigGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
@@ -16,7 +17,7 @@ class FrontendNew extends BaseCommand
      */
     protected $signature = 'frontend:new
                             {name : Name of the project}
-                            {pom-version : Version of Mango}';
+                            {version : Version of Mango}';
 
     /**
      * The description of the command.
@@ -37,6 +38,8 @@ class FrontendNew extends BaseCommand
         $this->createWebpackFile();
 
         $this->createPomFile();
+
+        $this->createPackageFile();
 
         $this->info($name . ' created successfully.');
     }
@@ -76,7 +79,7 @@ class FrontendNew extends BaseCommand
 
         try {
 
-            $pomGenerator->createFile($this->getNameInput(), $this->argument('pom-version'));
+            $pomGenerator->createFile($this->getNameInput(), $this->argument('version'));
 
         } catch (FileExistsException $exception) {
 
@@ -86,6 +89,32 @@ class FrontendNew extends BaseCommand
         } catch (FileNotFoundException $exception) {
 
             $this->error('Pom configuration stub not found.');
+            return false;
+
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function createPackageFile()
+    {
+        $packageGenerator = resolve(PackageGenerator::class);
+
+        try {
+
+            $packageGenerator->createFile($this->getNameInput(), $this->argument('version'));
+
+        } catch (FileExistsException $exception) {
+
+            $this->error('package.json already exists.');
+            return false;
+
+        } catch (FileNotFoundException $exception) {
+
+            $this->error('package.json stub not found.');
             return false;
 
         }

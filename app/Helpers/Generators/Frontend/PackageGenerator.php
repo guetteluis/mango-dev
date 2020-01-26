@@ -7,28 +7,28 @@ use App\Helpers\Generators\Generator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class WebpackConfigGenerator extends Generator
+class PackageGenerator extends Generator
 {
     /**
      * Type of file to be generated;
      *
      * @var string
      */
-    protected $type = 'Webpack Configuration';
+    protected $type = 'NPM package';
 
     /**
-     * Webpack name
+     * Package name
      *
      * @var string
      */
-    protected $name = 'webpack';
+    protected $name = 'package';
 
     /**
-     * Webpack file extension
+     * Package file extension
      *
      * @var string
      */
-    protected $ext = '.config.js';
+    protected $ext = '.json';
 
     /**
      * @var string
@@ -36,15 +36,23 @@ class WebpackConfigGenerator extends Generator
     protected $projectName;
 
     /**
+     * @var string
+     */
+    protected $version;
+
+    /**
      * Creates file
      *
      * @param string $projectName
+     * @param string $version
      * @throws FileExistsException
      * @throws FileNotFoundException
      */
-    public function createFile(string $projectName)
+    public function createFile(string $projectName, string $version)
     {
         $this->projectName = $projectName;
+        $this->version = $version;
+
         $this->create();
     }
 
@@ -56,8 +64,10 @@ class WebpackConfigGenerator extends Generator
      */
     protected function replaceDummyNames(string $stub)
     {
-        $this->replaceYear($stub)
-            ->replaceAuthorName($stub);
+        $this->replaceAuthorName($stub)
+            ->replaceAuthorEmail($stub)
+            ->replaceProjectName($stub, $this->projectName)
+            ->replaceVersion($stub, $this->version);
 
         return $stub;
     }
@@ -70,7 +80,7 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = $this->getConfigDir() . '/stubs/frontend/Webpack.stub';
+        $stubPath = $this->getConfigDir() . '/stubs/frontend/Package.stub';
 
         return $this->files->get($stubPath);
     }
@@ -82,6 +92,6 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd(). '/' . $this->projectName;
+        return getcwd() . '/' . $this->projectName;
     }
 }

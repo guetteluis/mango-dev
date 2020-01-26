@@ -28,7 +28,7 @@ trait StubReplacer
      * @param string $stub
      * @return $this
      */
-    protected function replaceAuthor(string &$stub):self
+    protected function replaceAuthorName(string &$stub):self
     {
         $author = '';
 
@@ -38,7 +38,28 @@ trait StubReplacer
             $author = $line;
         });
 
-        $stub = str_replace('DummyAuthor', $author, $stub);
+        $stub = str_replace('DummyAuthorName', trim($author), $stub);
+
+        return $this;
+    }
+
+    /**
+     * Replace the author email for the given stub.
+     *
+     * @param string $stub
+     * @return $this
+     */
+    protected function replaceAuthorEmail(string &$stub):self
+    {
+        $authorEmail = '';
+
+        $process = new Process(['git', 'config', 'user.email'], null, null, null, null);
+
+        $process->run(function ($type, $line) use (&$authorEmail) {
+            $authorEmail = $line;
+        });
+
+        $stub = str_replace('DummyAuthorEmail', trim($authorEmail), $stub);
 
         return $this;
     }

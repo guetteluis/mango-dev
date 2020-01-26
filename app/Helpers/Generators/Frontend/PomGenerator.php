@@ -65,7 +65,6 @@ class PomGenerator extends Generator
     protected function replaceDummyNames(string $stub)
     {
         $this->replaceYear($stub)
-            ->replaceAuthor($stub)
             ->replaceProjectName($stub, $this->projectName)
             ->replaceVersion($stub, $this->version);
 
