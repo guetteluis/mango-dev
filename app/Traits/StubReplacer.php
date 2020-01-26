@@ -68,4 +68,32 @@ trait StubReplacer
     {
         return str_replace('DummyClassname', $name, $stub);
     }
+
+    /**
+     * Replace the project name for the given stub.
+     *
+     * @param $stub
+     * @param string $name
+     * @return $this
+     */
+    protected function replaceProjectName(string &$stub, string $name):self
+    {
+        $stub = str_replace('DummyProjectName', $name, $stub);
+
+        return $this;
+    }
+
+    /**
+     * Replace the version for the given stub.
+     *
+     * @param $stub
+     * @param string $version
+     * @return $this
+     */
+    protected function replaceVersion(string &$stub, string $version):self
+    {
+        $stub = str_replace('DummyVersion', $version, $stub);
+
+        return $this;
+    }
 }

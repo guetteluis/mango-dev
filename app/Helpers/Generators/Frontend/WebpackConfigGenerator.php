@@ -16,14 +16,14 @@ class WebpackConfigGenerator extends Generator
     protected $type = 'Webpack Configuration';
 
     /**
-     * Component class name
+     * Webpack name
      *
      * @var string
      */
     protected $name = 'webpack';
 
     /**
-     * Component class file extension
+     * Webpack file extension
      *
      * @var string
      */

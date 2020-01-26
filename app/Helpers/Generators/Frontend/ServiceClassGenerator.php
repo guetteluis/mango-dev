@@ -16,14 +16,14 @@ class ServiceClassGenerator extends Generator
     protected $type = 'Service';
 
     /**
-     * Component class name
+     * Service class name
      *
      * @var string
      */
     protected $name;
 
     /**
-     * Component class file extension
+     * Service class file extension
      *
      * @var string
      */

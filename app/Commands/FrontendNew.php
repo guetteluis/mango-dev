@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Helpers\Generators\Frontend\PomGenerator;
 use App\Helpers\Generators\Frontend\WebpackConfigGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -14,7 +15,8 @@ class FrontendNew extends BaseCommand
      * @var string
      */
     protected $signature = 'frontend:new
-                            {name : Name of the project}';
+                            {name : Name of the project}
+                            {pom-version : Version of Mango}';
 
     /**
      * The description of the command.
@@ -33,6 +35,8 @@ class FrontendNew extends BaseCommand
         $name = $this->getNameInput();
 
         $this->createWebpackFile();
+
+        $this->createPomFile();
 
         $this->info($name . ' created successfully.');
     }
@@ -56,6 +60,32 @@ class FrontendNew extends BaseCommand
         } catch (FileNotFoundException $exception) {
 
             $this->error('Webpack configuration stub not found.');
+            return false;
+
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function createPomFile()
+    {
+        $pomGenerator = resolve(PomGenerator::class);
+
+        try {
+
+            $pomGenerator->createPom($this->getNameInput(), $this->argument('pom-version'));
+
+        } catch (FileExistsException $exception) {
+
+            $this->error('Pom configuration already exists.');
+            return false;
+
+        } catch (FileNotFoundException $exception) {
+
+            $this->error('Pom configuration stub not found.');
             return false;
 
         }
