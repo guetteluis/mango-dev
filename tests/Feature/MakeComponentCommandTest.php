@@ -9,7 +9,6 @@ class MakeComponentCommandTest extends TestCase
 {
     /**
      * @test
-     *
      */
     public function a_component_can_be_created()
     {

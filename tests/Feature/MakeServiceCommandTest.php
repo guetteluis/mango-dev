@@ -9,7 +9,6 @@ class MakeServiceCommandTest extends TestCase
 {
     /**
      * @test
-     *
      */
     public function a_service_can_be_created()
     {
