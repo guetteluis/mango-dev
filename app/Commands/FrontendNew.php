@@ -2,7 +2,7 @@
 
 namespace App\Commands;
 
-use App\Helpers\Generators\WebpackConfigGenerator;
+use App\Helpers\Generators\Frontend\WebpackConfigGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 

@@ -1,34 +1,33 @@
 <?php
 
 
-namespace App\Helpers\Generators;
+namespace App\Helpers\Generators\Frontend;
 
-
+use App\Helpers\Generators\Generator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class ModuleGenerator extends Generator
+class WebpackConfigGenerator extends Generator
 {
     /**
      * Type of file to be generated;
      *
      * @var string
      */
-    protected $type = 'Module';
+    protected $type = 'Webpack Configuration';
 
     /**
-     * Module class name
+     * Component class name
      *
      * @var string
      */
-    protected $name;
+    protected $name = 'webpack';
 
     /**
-     * Module class file extension
+     * Component class file extension
      *
      * @var string
      */
-    protected $ext = '.js';
-
+    protected $ext = '.config.js';
 
     /**
      * Replace dummy names.
@@ -51,7 +50,7 @@ class ModuleGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Module.stub';
+        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Webpack.stub';
 
         return $this->files->get($stubPath);
     }
@@ -63,6 +62,6 @@ class ModuleGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd() . '/web-src';
+        return getcwd();
     }
 }

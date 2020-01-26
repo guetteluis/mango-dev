@@ -1,33 +1,34 @@
 <?php
 
 
-namespace App\Helpers\Generators;
+namespace App\Helpers\Generators\Frontend;
 
-
+use App\Helpers\Generators\Generator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class WebpackConfigGenerator extends Generator
+class ComponentClassGenerator extends Generator
 {
     /**
      * Type of file to be generated;
      *
      * @var string
      */
-    protected $type = 'Webpack Configuration';
+    protected $type = 'Component';
 
     /**
      * Component class name
      *
      * @var string
      */
-    protected $name = 'webpack';
+    protected $name;
 
     /**
      * Component class file extension
      *
      * @var string
      */
-    protected $ext = '.config.js';
+    protected $ext = '.js';
+
 
     /**
      * Replace dummy names.
@@ -39,6 +40,7 @@ class WebpackConfigGenerator extends Generator
     {
         return $this->replaceYear($stub)
             ->replaceAuthor($stub)
+            ->replaceTemplate($stub, $this->name)
             ->replaceClass($stub, $this->name);
     }
 
@@ -50,7 +52,7 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Webpack.stub';
+        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Component.stub';
 
         return $this->files->get($stubPath);
     }
@@ -62,6 +64,6 @@ class WebpackConfigGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd();
+        return getcwd() . '/web-src/components/' . $this->name;
     }
 }

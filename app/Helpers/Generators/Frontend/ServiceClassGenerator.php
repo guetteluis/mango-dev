@@ -1,19 +1,19 @@
 <?php
 
 
-namespace App\Helpers\Generators;
+namespace App\Helpers\Generators\Frontend;
 
-
+use App\Helpers\Generators\Generator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class ComponentClassGenerator extends Generator
+class ServiceClassGenerator extends Generator
 {
     /**
      * Type of file to be generated;
      *
      * @var string
      */
-    protected $type = 'Component';
+    protected $type = 'Service';
 
     /**
      * Component class name
@@ -40,7 +40,6 @@ class ComponentClassGenerator extends Generator
     {
         return $this->replaceYear($stub)
             ->replaceAuthor($stub)
-            ->replaceTemplate($stub, $this->name)
             ->replaceClass($stub, $this->name);
     }
 
@@ -52,7 +51,7 @@ class ComponentClassGenerator extends Generator
      */
     protected function getStub()
     {
-        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Component.stub';
+        $stubPath = getcwd() . '/app/Commands/stubs/frontend/Service.stub';
 
         return $this->files->get($stubPath);
     }
@@ -64,6 +63,6 @@ class ComponentClassGenerator extends Generator
      */
     protected function getDirectory()
     {
-        return getcwd() . '/web-src/components/' . $this->name;
+        return getcwd() . '/web-src/services/' . $this->name;
     }
 }

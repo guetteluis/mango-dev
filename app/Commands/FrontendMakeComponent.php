@@ -2,8 +2,8 @@
 
 namespace App\Commands;
 
-use App\Helpers\Generators\ComponentClassGenerator;
-use App\Helpers\Generators\ComponentTemplateGenerator;
+use App\Helpers\Generators\Frontend\ComponentClassGenerator;
+use App\Helpers\Generators\Frontend\ComponentTemplateGenerator;
 use App\Traits\StubReplacer;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

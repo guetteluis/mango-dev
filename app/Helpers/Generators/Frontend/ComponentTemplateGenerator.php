@@ -1,8 +1,9 @@
 <?php
 
 
-namespace App\Helpers\Generators;
+namespace App\Helpers\Generators\Frontend;
 
+use App\Helpers\Generators\Generator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class ComponentTemplateGenerator extends Generator

@@ -2,7 +2,7 @@
 
 namespace App\Commands;
 
-use App\Helpers\Generators\ServiceClassGenerator;
+use App\Helpers\Generators\Frontend\ServiceClassGenerator;
 use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
