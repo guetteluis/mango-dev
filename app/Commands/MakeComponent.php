@@ -2,9 +2,11 @@
 
 namespace App\Commands;
 
+use App\Helpers\Generators\ComponentClassGenerator;
+use App\Helpers\Generators\ComponentTemplateGenerator;
 use App\Traits\StubReplacer;
+use Illuminate\Contracts\Filesystem\FileExistsException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Filesystem\Filesystem;
 use LaravelZero\Framework\Commands\Command;
 
 class MakeComponent extends Command
@@ -27,131 +29,35 @@ class MakeComponent extends Command
     protected $description = 'Creates a AngularJS component';
 
     /**
-     * The filesystem instance.
-     *
-     * @var Filesystem
-     */
-    protected $files;
-
-    /**
-     * Create a new controller creator command instance.
-     *
-     * @param Filesystem $files
-     */
-    public function __construct(Filesystem $files)
-    {
-        parent::__construct();
-
-        $this->files = $files;
-    }
-
-    /**
      * Execute the console command.
      *
-     * @return bool|null
-     *
-     * @throws FileNotFoundException
+     * @param ComponentClassGenerator $classGenerator
+     * @param ComponentTemplateGenerator $templateGenerator
+     * @return void
      */
-    public function handle()
+    public function handle(ComponentClassGenerator $classGenerator,
+                           ComponentTemplateGenerator $templateGenerator)
     {
         $name = $this->getNameInput();
 
-        $path = $this->getPath($name);
+        try {
 
-        if ((!$this->hasOption('force') || !$this->option('force'))
-            && $this->alreadyExists($name)) {
+            $classGenerator->create($name);
+            $templateGenerator->create($name);
 
-            $this->error('Component already exists!');
+        } catch (FileExistsException $exception) {
 
-            return false;
+            $this->error('Component already exists.');
+            die();
+
+        } catch (FileNotFoundException $exception) {
+
+            $this->error('Component stub not found.');
+            die();
+
         }
-
-        $this->makeDirectory($path);
-
-        $this->files->put($path, $this->buildClass($name));
-
-        $this->generateTemplate($name);
 
         $this->info('Component created successfully.');
-    }
-
-    protected function generateTemplate(string $name)
-    {
-        $stub = $this->files->get($this->getStub('template'));
-        $path = getcwd() . '/web-src/components/' . $name . '/' . $name . '.html';
-
-        $this->files->put($path, $this->replaceClass($stub, $name));
-    }
-
-    /**
-     * Get the stub file for the generator.
-     *
-     * @param string $type
-     * @return string
-     */
-    protected function getStub(string $type = 'component'):string
-    {
-        if ($type === 'template') {
-            return __DIR__ . '/stubs/ComponentTemplate.stub';
-        }
-
-        return __DIR__ . '/stubs/Component.stub';
-    }
-
-    /**
-     * Determine if the component already exists.
-     *
-     * @param string $name
-     * @return bool
-     */
-    protected function alreadyExists(string $name):bool
-    {
-        return $this->files->exists($this->getPath($name));
-    }
-
-    /**
-     * Get the destination component path.
-     *
-     * @param $name
-     * @return string
-     */
-    protected function getPath($name):string
-    {
-        $path = getcwd() . '/web-src/components/' . $name;
-
-        return  $path . '/' . $name . '.js';
-    }
-
-    /**
-     * Build the directory for the class if necessary.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    protected function makeDirectory($path)
-    {
-        if (! $this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0777, true, true);
-        }
-
-        return $path;
-    }
-
-    /**
-     * Build the class with the given name.
-     *
-     * @param  string  $name
-     * @return string
-     *
-     * @throws FileNotFoundException
-     */
-    protected function buildClass($name)
-    {
-        $stub = $this->files->get($this->getStub());
-
-        return $this->replaceAuthor($stub)
-            ->replaceTemplate($stub, $name)
-            ->replaceClass($stub, $name);
     }
 
     /**
